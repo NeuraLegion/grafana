@@ -19,6 +19,8 @@ FROM golang:1.26.2-alpine AS go-builder-base
 FROM --platform=${JS_PLATFORM} node:24-alpine AS js-builder-base
 # Javascript build stage
 FROM --platform=${JS_PLATFORM} ${JS_IMAGE} AS js-builder
+
+RUN corepack enable
 ARG JS_NODE_ENV=production
 ARG JS_YARN_INSTALL_FLAG=--immutable
 ARG JS_YARN_BUILD_FLAG=build

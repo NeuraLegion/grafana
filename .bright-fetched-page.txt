@@ -1,0 +1,351 @@
+redis cache connstr can't be set through environment variable? · Issue #17643 · grafana/grafana · GitHub
+
+Skip to content
+
+Navigation Menu
+
+Toggle navigation
+
+Sign in
+
+Appearance settings
+
+PlatformAI CODE CREATIONGitHub CopilotWrite better code with AI
+
+GitHub SparkBuild and deploy intelligent apps
+
+GitHub ModelsManage and compare prompts
+
+MCP RegistryNewIntegrate external tools
+
+DEVELOPER WORKFLOWSActionsAutomate any workflow
+
+CodespacesInstant dev environments
+
+IssuesPlan and track work
+
+Code ReviewManage code changes
+
+APPLICATION SECURITYGitHub Advanced SecurityFind and fix vulnerabilities
+
+Code securitySecure your code as you build
+
+Secret protectionStop leaks before they start
+
+EXPLOREWhy GitHub
+Documentation
+Blog
+Changelog
+Marketplace
+
+View all features
+
+SolutionsBY COMPANY SIZEEnterprises
+Small and medium teams
+Startups
+Nonprofits
+
+BY USE CASEApp Modernization
+DevSecOps
+DevOps
+CI/CD
+View all use cases
+
+BY INDUSTRYHealthcare
+Financial services
+Manufacturing
+Government
+View all industries
+
+View all solutions
+
+ResourcesEXPLORE BY TOPICAI
+Software Development
+DevOps
+Security
+View all topics
+
+EXPLORE BY TYPECustomer stories
+Events & webinars
+Ebooks & reports
+Business insights
+GitHub Skills
+
+SUPPORT & SERVICESDocumentation
+Customer support
+Community forum
+Trust center
+Partners
+
+View all resources
+
+Open SourceCOMMUNITYGitHub SponsorsFund open source developers
+
+PROGRAMSSecurity Lab
+Maintainer Community
+Accelerator
+GitHub Stars
+Archive Program
+
+REPOSITORIESTopics
+Trending
+Collections
+
+EnterpriseENTERPRISE SOLUTIONSEnterprise platformAI-powered developer platform
+
+AVAILABLE ADD-ONSGitHub Advanced SecurityEnterprise-grade security features
+
+Copilot for BusinessEnterprise-grade AI features
+
+Premium SupportEnterprise-grade 24/7 support
+
+Pricing
+
+Search or jump to...
+
+Search code, repositories, users, issues, pull requests...
+
+-->
+
+Search
+
+Clear
+
+Search syntax tips 
+
+Provide feedback
+
+-->
+We read every piece of feedback, and take your input very seriously.
+
+Include my email address so I can be contacted
+
+Cancel
+
+Submit feedback
+
+Saved searches
+
+Use saved searches to filter your results more quickly
+
+-->
+
+Name
+
+Query
+
+To see all available qualifiers, see our documentation.
+
+Cancel
+
+Create saved search
+
+Sign in
+
+Sign up
+
+Appearance settings
+
+Resetting focus
+
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+
+Dismiss alert
+
+{{ message }}
+
+grafana
+
+/
+
+grafana
+
+Public
+
+Notifications
+You must be signed in to change notification settings
+
+Fork
+13.8k
+
+Star
+73.6k
+
+Code
+
+Issues
+3.1k
+
+Pull requests
+674
+
+Discussions
+
+Actions
+
+Projects
+
+Security and quality
+28
+
+Insights
+
+Additional navigation options
+
+Code
+
+Issues
+
+Pull requests
+
+Discussions
+
+Actions
+
+Projects
+
+Security and quality
+
+Insights
+
+redis cache connstr can't be set through environment variable? #17643
+
+New issue
+Copy link
+
+New issue
+Copy link
+
+Closed
+#17675
+
+Closed
+redis cache connstr can't be set through environment variable?#17643
+#17675
+
+Copy link
+
+Assignees
+
+Labels
+area/backendarea/backend/configtype/bug
+
+Milestone
+6.2.5
+
+Description
+
+Roguelazer
+opened on Jun 18, 2019
+
+Issue body actions
+
+What happened:
+
+I attempted to use the redis backend for remote_cache.
+
+To configure it, I exported the environment variables
+
+GF_REMOTE_CACHE_TYPE=redis
+GF_REMOTE_CACHE_CONNSTR=addr=a.b.c.d:25224,db=0 
+
+Grafana fails to start with the log
+
+"Service init failed: incorrect redis connection string format detected for '', format is key=value,key=value"
+
+If I set the relevant property in grafana.ini, everything works fine; the bug is only when I use the environment variable to attempt to configure the remote_cache subsystem.
+
+What you expected to happen:
+
+Grafana starts up and uses the redis instance on host a.b.c.d port 25224
+
+How to reproduce it (as minimally and precisely as possible):
+
+Attempt to configure the remote_cache with the GF_REMOTE_CACHE_CONNSTR environment variable
+
+Anything else we need to know?:
+
+This is almost certainly because the connstr key is not present in conf/defaults.ini so cannot be overridden by environment variables.
+
+This is moderately infuriating.
+
+Environment:
+
+Grafana version: 6.2.4
+
+Data source type & version: N/A
+
+OS Grafana is installed on: Linux
+
+User OS & Browser: N/A
+
+Grafana plugins: N/A
+
+Others: N/A
+
+Reactions are currently unavailable
+
+Metadata
+Metadata
+Assignees
+
+kylebrandt
+
+Labels
+
+area/backendarea/backend/configtype/bug
+
+Type
+
+No type
+
+Fields
+Give feedback
+
+No fields configured for issues without a type.
+
+Projects
+
+No projects
+
+Milestone
+
+6.2.5
+
+Relationships
+
+None yet
+
+Development
+
+No branches or pull requests
+
+Issue actions
+
+Footer
+
+&copy; 2026 GitHub, Inc.
+
+Footer navigation
+
+Terms
+
+Privacy
+
+Security
+
+Status
+
+Community
+
+Docs
+
+Contact
+
+Manage cookies
+
+Do not share my personal information
+
+You can’t perform that action at this time.

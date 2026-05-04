@@ -1,0 +1,111 @@
+services:
+  app:
+    build:
+      context: .
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
+      GF_PATHS_DATA: /var/lib/grafana
+      GF_PATHS_HOME: /usr/share/grafana
+      GF_PATHS_LOGS: /var/log/grafana
+      GF_PATHS_PLUGINS: /var/lib/grafana/plugins
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+      GF_SERVER_HTTP_PORT: "3000"
+      GF_SERVER_DOMAIN: localhost
+      GF_SERVER_ROOT_URL: http://localhost:3000/
+      GF_SERVER_SERVE_FROM_SUB_PATH: "false"
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_HOST: db:5432
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: grafana
+      GF_DATABASE_PASSWORD: grafana
+      GF_LOG_MODE: console file
+      GF_LOG_LEVEL: info
+      GF_SECURITY_ADMIN_USER: bright_test
+      GF_SECURITY_ADMIN_PASSWORD: BrightTest123!
+      GF_SECURITY_ADMIN_EMAIL: bright@test.com
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "false"
+      GF_AUTH_BASIC_ENABLED: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_TOKEN_ROTATION_INTERVAL_MINUTES: "999999"
+      GF_SECURITY_DISABLE_BRUTE_FORCE_LOGIN_PROTECTION: "true"
+      GF_SECURITY_BRUTE_FORCE_LOGIN_PROTECTION_MAX_ATTEMPTS: "999999"
+      GF_SECURITY_DISABLE_USERNAME_LOGIN_PROTECTION: "true"
+      GF_SECURITY_DISABLE_IP_ADDRESS_LOGIN_PROTECTION: "true"
+      GF_AUTH_LOGIN_MAXIMUM_INACTIVE_LIFETIME_DURATION: 3650d
+      GF_AUTH_LOGIN_MAXIMUM_LIFETIME_DURATION: 3650d
+      GF_UNIFIED_ALERTING_HA_REDIS_ADDRESS: redis:6379
+      GF_FEATURE_TOGGLES_ENABLE: unifiedAlerting,alertingSimplifiedRouting
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      loki:
+        condition: service_started
+      prometheus:
+        condition: service_started
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: grafana
+      POSTGRES_PASSWORD: grafana
+      POSTGRES_DB: grafana
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    shm_size: 256m
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U grafana
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  loki:
+    image: grafana/loki:3.7.1
+    command:
+      - -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki-data:/loki
+    ports:
+      - "3100:3100"
+
+  prometheus:
+    image: prom/prometheus:v2.5.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    volumes:
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+
+volumes:
+  db-data:
+  redis-data:
+  loki-data:
+  prometheus-data:

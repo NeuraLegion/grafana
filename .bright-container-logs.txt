@@ -1,0 +1,67 @@
+=== grafana-app-1 ===
+[32mINFO [0m[05-04|17:16:22] Starting Grafana                         [32mlogger[0m=settings [32mversion[0m=13.1.0-local [32mcommit[0m=unknown [32mbranch[0m=main [32mcompiled[0m=2026-05-04T11:52:53Z
+[32mINFO [0m[05-04|17:16:22] Unified migration configs enforced       [32mlogger[0m=settings [32mstorage_type[0m=unified [32mtarget[0m=[all]
+[32mINFO [0m[05-04|17:16:22] Enforcing mode 5 for resource in unified storage [32mlogger[0m=settings [32mresource[0m=dashboards.dashboard.grafana.app
+[32mINFO [0m[05-04|17:16:22] Enforcing mode 5 for resource in unified storage [32mlogger[0m=settings [32mresource[0m=playlists.playlist.grafana.app
+[32mINFO [0m[05-04|17:16:22] Enforcing mode 5 for resource in unified storage [32mlogger[0m=settings [32mresource[0m=folders.folder.grafana.app
+[32mINFO [0m[05-04|17:16:22] Config loaded from                       [32mlogger[0m=settings [32mfile[0m=/usr/share/grafana/conf/defaults.ini
+[32mINFO [0m[05-04|17:16:22] Config loaded from                       [32mlogger[0m=settings [32mfile[0m=/etc/grafana/grafana.ini
+[32mINFO [0m[05-04|17:16:22] Config overridden from command line      [32mlogger[0m=settings [32marg[0m="default.paths.data=/var/lib/grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from command line      [32mlogger[0m=settings [32marg[0m="default.paths.logs=/var/log/grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from command line      [32mlogger[0m=settings [32marg[0m="default.paths.plugins=/var/lib/grafana/plugins"
+[32mINFO [0m[05-04|17:16:22] Config overridden from command line      [32mlogger[0m=settings [32marg[0m="default.paths.provisioning=/etc/grafana/provisioning"
+[32mINFO [0m[05-04|17:16:22] Config overridden from command line      [32mlogger[0m=settings [32marg[0m="default.log.mode=console"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_DATA=/var/lib/grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_LOGS=/var/log/grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_PLUGINS=/var/lib/grafana/plugins"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_PROVISIONING=/etc/grafana/provisioning"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_SERVER_HTTP_PORT=3000"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_SERVER_DOMAIN=localhost"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_DATABASE_TYPE=postgres"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_DATABASE_HOST=db:5432"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_DATABASE_NAME=grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_DATABASE_USER=grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_DATABASE_PASSWORD=*********"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_REMOTE_CACHE_TYPE=redis"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_REMOTE_CACHE_CONNSTR=redis:6379"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_SECURITY_ADMIN_USER=admin"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_SECURITY_ADMIN_PASSWORD=*********"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_LOG_MODE=console file"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_LOG_LEVEL=info"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_UNIFIED_ALERTING_HA_REDIS_ADDRESS=redis:6379"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_HOME=/usr/share/grafana"
+[32mINFO [0m[05-04|17:16:22] Config overridden from Environment variable [32mlogger[0m=settings [32mvar[0m="GF_PATHS_CONFIG=/etc/grafana/grafana.ini"
+[32mINFO [0m[05-04|17:16:22] Target                                   [32mlogger[0m=settings [32mtarget[0m=[all]
+[32mINFO [0m[05-04|17:16:22] Path Home                                [32mlogger[0m=settings [32mpath[0m=/usr/share/grafana
+[32mINFO [0m[05-04|17:16:22] Path Data                                [32mlogger[0m=settings [32mpath[0m=/var/lib/grafana
+[32mINFO [0m[05-04|17:16:22] Path Logs                                [32mlogger[0m=settings [32mpath[0m=/var/log/grafana
+[32mINFO [0m[05-04|17:16:22] Path Plugins                             [32mlogger[0m=settings [32mpath[0m="[/var/lib/grafana/plugins /usr/share/grafana/data/plugins-bundled]"
+[32mINFO [0m[05-04|17:16:22] Path Provisioning                        [32mlogger[0m=settings [32mpath[0m=/etc/grafana/provisioning
+[32mINFO [0m[05-04|17:16:22] App mode production                      [32mlogger[0m=settings
+[32mINFO [0m[05-04|17:16:22] FeatureToggles                           [32mlogger[0m=featuremgmt [32malertRuleRestore[0m=true [32malertingBulkActionsInUI[0m=true [32malertingImportYAMLUI[0m=true [32malertingListViewV2[0m=true [32malertingMigrationUI[0m=true [32malertingNavigationV2[0m=true [32malertingNotificationsStepMode[0m=true [32malertingQueryAndExpressionsStepMode[0m=true [32malertingRulePermanentlyDelete[0m=true [32malertingRuleRecoverDeleted[0m=true [32malertingRuleVersionHistoryRestore[0m=true [32malertingSaveStateCompressed[0m=true [32malertingUIOptimizeReducer[0m=true [32malertingUIUseBackendFilters[0m=true [32malertingUIUseFullyCompatBackendFilters[0m=true [32malertingUseNewSimplifiedRoutingHashAlgorithm[0m=true [32mannotationPermissionUpdate[0m=true [32mawsAsyncQueryCaching[0m=true [32mawsDatasourcesTempCredentials[0m=true [32mazureMonitorEnableUserAuth[0m=true [32mazureMonitorPrometheusExemplars[0m=true [32mazureResourcePickerUpdates[0m=true [32mcloudWatchCrossAccountQuerying[0m=true [32mcloudWatchNewLabelParsing[0m=true [32mcloudWatchRoundUpEndTime[0m=true [32mdashboardDefaultLayoutSelector[0m=true [32mdashboardNewLayouts[0m=true [32mdashgpt[0m=true [32menableSCIM[0m=true [32mexternalVizSuggestions[0m=true [32mfeedbackButton[0m=true [32mgrafanaAdvisor[0m=true [32mgrafanaAssistantInProfilesDrilldown[0m=true [32mgrafanaconThemes[0m=true [32mimprovedExternalSessionHandling[0m=true [32mimprovedExternalSessionHandlingSAML[0m=true [32minfluxdbBackendMigration[0m=true [32mlokiLabelNamesQueryApi[0m=true [32mlokiQuerySplitting[0m=true [32mmultiPropsVariables[0m=true [32mnewLogsPanel[0m=true [32mnewPanelPadding[0m=true [32mnewTimeRangeZoomShortcuts[0m=true [32mnewUnconfiguredPanel[0m=true [32mnewVizSuggestions[0m=true [32monlyStoreActionSets[0m=true [32mpreventPanelChromeOverflow[0m=true [32mprometheusAzureOverrideAudience[0m=true [32mprometheusTypeMigration[0m=true [32mprovisioning[0m=true [32mprovisioningFolderMetadata[0m=true [32mrememberUserOrgForSso[0m=true [32mrenderAuthJWT[0m=true [32mrestoreDashboards[0m=true [32mrestrictedPluginApis[0m=true [32msceneCsvExport[0m=true [32msharingDashboardImage[0m=true [32msplashScreen[0m=true [32mtimeRangePan[0m=true [32museSessionStorageForRedirection[0m=true
+[32mINFO [0m[05-04|17:16:22] Connecting to DB                         [32mlogger[0m=sqlstore [32mdbtype[0m=postgres
+[32mINFO [0m[05-04|17:16:22] Locking database                         [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:16:22] Starting DB migrations                   [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:16:22] migrations completed                     [32mlogger[0m=migrator [32mperformed[0m=0 [32mskipped[0m=710 [32mduration[0m=467.181µs
+[32mINFO [0m[05-04|17:16:22] Unlocking database                       [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:16:22] Envelope encryption state                [32mlogger[0m=secrets [32mcurrent provider[0m=secretKey.v1
+[31mError[0m: [31m✗[0m incorrect redis connection string format detected for 'redis:6379', format is key=value,key=value
+
+=== grafana-db-1 ===
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+=== grafana-redis-1 ===
+1:C 04 May 2026 17:16:16.425 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+1:C 04 May 2026 17:16:16.425 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 04 May 2026 17:16:16.425 * Redis version=7.4.8, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 04 May 2026 17:16:16.425 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+1:M 04 May 2026 17:16:16.426 * Increased maximum number of open files to 10032 (it was originally set to 1024).
+1:M 04 May 2026 17:16:16.426 * monotonic clock: POSIX clock_gettime
+1:M 04 May 2026 17:16:16.426 * Running mode=standalone, port=6379.
+1:M 04 May 2026 17:16:16.427 * Server initialized
+1:M 04 May 2026 17:16:16.427 * Loading RDB produced by version 7.4.8
+1:M 04 May 2026 17:16:16.427 * RDB age 444 seconds
+1:M 04 May 2026 17:16:16.427 * RDB memory usage when created 1.12 Mb
+1:M 04 May 2026 17:16:16.427 * Done loading RDB, keys loaded: 0, keys expired: 0.
+1:M 04 May 2026 17:16:16.427 * DB loaded from disk: 0.000 seconds
+1:M 04 May 2026 17:16:16.427 * Ready to accept connections tcp

@@ -1,0 +1,63 @@
+Compose container "grafana-app-1" crashed (state: exited, exit code: 1)
+
+Container diagnostics:
+Network port config:
+{}
+
+Processes inside container:
+Error response from daemon: container 208dceefb23e86541b2d476ec9bb23052a973e9f880ba175663bb44b88c61933 is not running
+
+Container stdout/stderr (last 50 lines):
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add missing_series_evals_to_resolve column to alert_rule_version"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add missing_series_evals_to_resolve column to alert_rule_version" [32mduration[0m=346.625µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="remove the datasources:drilldown action"
+[32mINFO [0m[05-04|17:28:08] Removed 0 datasources:drilldown permissions [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="remove the datasources:drilldown action" [32mduration[0m=279.455µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="remove title in folder unique index"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="remove title in folder unique index" [32mduration[0m=1.645637ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add fired_at column to alert_instance table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add fired_at column to alert_instance table" [32mduration[0m=408.495µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="ensure rule_group column is case sensitive in returned results"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="ensure rule_group column is case sensitive in returned results" [32mduration[0m=23.616µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="expand created_by in alert_rule_version table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="expand created_by in alert_rule_version table" [32mduration[0m=487.54µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="expand updated_by in alert_rule table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="expand updated_by in alert_rule table" [32mduration[0m=478.714µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add index in alert_rule on org_id, namespace_uid, rule_group and rule_group_idx columns"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add index in alert_rule on org_id, namespace_uid, rule_group and rule_group_idx columns" [32mduration[0m=3.462556ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add annotations column to alert_instance table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add annotations column to alert_instance table" [32mduration[0m=422.662µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="ensure namespace_uid column sorts the same way as golang"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="ensure namespace_uid column sorts the same way as golang" [32mduration[0m=4.807966ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="ensure rule_group column sorts the same way as golang"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="ensure rule_group column sorts the same way as golang" [32mduration[0m=5.519303ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add 'alert.notifications.receivers.protected:write' to receiver admins"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add 'alert.notifications.receivers.protected:write' to receiver admins" [32mduration[0m=1.064526ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add evaluation_duration_ns column to alert_instance table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add evaluation_duration_ns column to alert_instance table" [32mduration[0m=459.22µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add last_error column to alert_instance table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add last_error column to alert_instance table" [32mduration[0m=442.257µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add last_result column to alert_instance table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add last_result column to alert_instance table" [32mduration[0m=381.237µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add 'alert.notifications.receivers.test:create' to managed roles"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add 'alert.notifications.receivers.test:create' to managed roles" [32mduration[0m=923.368µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add folder_fullpath column to alert_rule"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add folder_fullpath column to alert_rule" [32mduration[0m=411.644µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add index on folder_fullpath in alert_rule"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add index on folder_fullpath in alert_rule" [32mduration[0m=3.32177ms
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add alert_routing column to alert_rule table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add alert_routing column to alert_rule table" [32mduration[0m=406.176µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="add alert_routing column to alert_rule_version table"
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="add alert_routing column to alert_rule_version table" [32mduration[0m=475.691µs
+[32mINFO [0m[05-04|17:28:08] Executing migration                      [32mlogger[0m=migrator [32mid[0m="grant basic roles access to default notification policy"
+[32mINFO [0m[05-04|17:28:08] No managed roles found for editor/viewer, skipping default notification policy permissions [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:28:08] Migration successfully executed          [32mlogger[0m=migrator [32mid[0m="grant basic roles access to default notification policy" [32mduration[0m=816.379µs
+[32mINFO [0m[05-04|17:28:08] migrations completed                     [32mlogger[0m=migrator [32mperformed[0m=710 [32mskipped[0m=0 [32mduration[0m=1.733146957s
+[32mINFO [0m[05-04|17:28:08] Unlocking database                       [32mlogger[0m=migrator
+[32mINFO [0m[05-04|17:28:08] Created default admin                    [32mlogger[0m=sqlstore [32muser[0m=admin
+[32mINFO [0m[05-04|17:28:08] Created default organization             [32mlogger[0m=sqlstore
+[32mINFO [0m[05-04|17:28:08] Envelope encryption state                [32mlogger[0m=secrets [32mcurrent provider[0m=secretKey.v1
+[31mError[0m: [31m✗[0m unrecognized option 'address' in redis connection string
+
+Application logs inside container:
+Error response from daemon: container 208dceefb23e86541b2d476ec9bb23052a973e9f880ba175663bb44b88c61933 is not running
