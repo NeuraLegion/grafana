@@ -68,6 +68,9 @@ func getSubmodulePaths(wf *modfile.WorkFile, skip string) []string {
 		if hasSkipTag(d, skip) {
 			continue
 		}
+		if strings.HasPrefix(d.Path, ".") || strings.Contains(d.Path, "..") {
+			continue
+		}
 		paths = append(paths, d.Path)
 	}
 	return paths
