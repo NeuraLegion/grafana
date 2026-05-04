@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"html/template"
 	"net"
+	"reflect"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -116,6 +117,27 @@ func (ctx *Context) HTML(status int, name string, data any) {
 func (ctx *Context) JSON(status int, data any) {
 	ctx.Resp.Header().Set(headerContentType, contentTypeJSON)
 	ctx.Resp.WriteHeader(status)
+
+	// Avoid accidentally exposing internal/sensitive fields by only allowing
+	// structs, maps, slices, arrays, and pointer-to-struct responses.
+	// Handlers should still pass DTOs/view models, but this prevents common
+	// accidental leaks of raw internal objects.
+	if data != nil {
+		v := reflect.ValueOf(data)
+		for v.Kind() == reflect.Ptr {
+			if v.IsNil() {
+				break
+			}
+			v = v.Elem()
+		}
+		switch v.Kind() {
+		case reflect.Struct, reflect.Map, reflect.Slice, reflect.Array:
+			// allowed
+		default:
+			panic("Context.JSON: unsupported response type")
+		}
+	}
+
 	enc := json.NewEncoder(ctx.Resp)
 	if Env != PROD {
 		enc.SetIndent("", "  ")

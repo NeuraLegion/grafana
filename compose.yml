@@ -1,0 +1,84 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
+      GF_PATHS_DATA: /var/lib/grafana
+      GF_PATHS_HOME: /usr/share/grafana
+      GF_PATHS_LOGS: /var/log/grafana
+      GF_PATHS_PLUGINS: /var/lib/grafana/plugins
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+      GF_SERVER_HTTP_PORT: "3000"
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_SECRET_KEY: CHANGE_ME_TO_A_RANDOM_SECRET
+      GF_SECURITY_DISABLE_BRUTE_FORCE_LOGIN_PROTECTION: "true"
+      GF_SECURITY_BRUTE_FORCE_LOGIN_PROTECTION_MAX_ATTEMPTS: "999999"
+      GF_SECURITY_DISABLE_USERNAME_LOGIN_PROTECTION: "true"
+      GF_SECURITY_DISABLE_IP_ADDRESS_LOGIN_PROTECTION: "true"
+      GF_AUTH_LOGIN_MAXIMUM_INACTIVE_LIFETIME_DURATION: 720h
+      GF_AUTH_LOGIN_MAXIMUM_LIFETIME_DURATION: 720h
+      GF_AUTH_TOKEN_ROTATION_INTERVAL_MINUTES: "1440"
+      GF_SECURITY_CSRF_ALWAYS_CHECK: "false"
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_HOST: db:5432
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: grafana
+      GF_DATABASE_PASSWORD: grafana
+      GF_LOG_MODE: console file
+      GF_LOG_LEVEL: info
+      GF_UNIFIED_ALERTING_HA_REDIS_ADDRESS: redis:6379
+      GF_LIVE_HA_ENGINE_ADDRESS: redis:6379
+      GF_SECRETS_MANAGER_DATA_KEYS_REDIS_URL: redis://redis:6379/0
+      NODE_ENV: production
+    stdin_open: true
+    tty: true
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: grafana
+      POSTGRES_PASSWORD: grafana
+      POSTGRES_DB: grafana
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U grafana"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  loki:
+    image: grafana/loki:3.2.0
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki-data:/loki
+
+volumes:
+  db-data:
+  redis-data:
+  loki-data:

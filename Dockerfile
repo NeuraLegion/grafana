@@ -44,7 +44,8 @@ COPY scripts/uplot-compare scripts/uplot-compare
 #
 ENV NODE_ENV=${JS_NODE_ENV}
 #
-RUN if [ "$JS_YARN_INSTALL_FLAG" = "" ]; then \
+RUN corepack enable && \
+  if [ "$JS_YARN_INSTALL_FLAG" = "" ]; then \
     yarn install; \
   else \
     yarn install --immutable; \
