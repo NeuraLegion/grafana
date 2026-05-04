@@ -28,6 +28,7 @@ ENV NODE_OPTIONS=--max_old_space_size=8000
 WORKDIR /tmp/grafana
 
 RUN apk add --no-cache make build-base python3
+RUN corepack enable
 
 COPY package.json project.json nx.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
@@ -68,8 +69,8 @@ ARG WIRE_TAGS="oss"
 RUN if grep -i -q alpine /etc/issue; then \
   apk add --no-cache \
   bash \
-  # Install build dependencies
-  make git; \
+  make \
+  git; \
   fi
 
 WORKDIR /tmp/grafana
@@ -146,7 +147,7 @@ ENV PATH="/usr/share/grafana/bin:$PATH" \
 
 WORKDIR $GF_PATHS_HOME
 
-RUN apk add --no-cache ca-certificates bash bubblewrap curl tzdata musl-utils && \
+RUN apk add --no-cache ca-certificates bash bubblewrap curl tzdata musl-utils wget && \
   apk info -vv | sort
 
 # glibc support for alpine x86_64 only

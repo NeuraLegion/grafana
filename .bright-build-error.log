@@ -1,0 +1,10 @@
+docker compose --wait failed and port 3000 is not reachable. Original error: Process exited with code 1.
+
+Output:
+ERR:  Network grafana_default Creating 
+ERR:  Network grafana_default Created 
+ERR:  Volume grafana_db-data Creating 
+ERR:  Volume grafana_db-data Created 
+ERR:  Volume grafana_app-data Creating 
+ERR:  Volume grafana_app-data Created 
+ERR:  Volume grafana_app-plu

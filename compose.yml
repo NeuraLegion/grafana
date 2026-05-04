@@ -1,0 +1,71 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: grafana
+      POSTGRES_PASSWORD: grafana
+      POSTGRES_DB: grafana
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U grafana"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      args:
+        JS_YARN_BUILD_FLAG: build
+        JS_YARN_INSTALL_FLAG: --immutable
+        GO_BUILD_TAGS: oss
+        WIRE_TAGS: oss
+    init: true
+    ports:
+      - "3000:3000"
+    environment:
+      GOFLAGS: ""
+      GF_PATHS_CONFIG: /etc/grafana/grafana.ini
+      GF_PATHS_DATA: /var/lib/grafana
+      GF_PATHS_HOME: /usr/share/grafana
+      GF_PATHS_LOGS: /var/log/grafana
+      GF_PATHS_PLUGINS: /var/lib/grafana/plugins
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+      GF_DATABASE_TYPE: postgres
+      GF_DATABASE_HOST: db:5432
+      GF_DATABASE_NAME: grafana
+      GF_DATABASE_USER: grafana
+      GF_DATABASE_PASSWORD: grafana
+      GF_SERVER_DOMAIN: localhost
+      GF_SERVER_ROOT_URL: http://localhost:3000/
+      GF_SERVER_ENFORCE_DOMAIN: "false"
+      GF_SECURITY_COOKIE_SAMESITE: lax
+      GF_SECURITY_COOKIE_SECURE: "false"
+      GF_SECURITY_ADMIN_USER: bright_test
+      GF_SECURITY_ADMIN_PASSWORD: BrightTest123!
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_DEFAULT_APP_MODE: production
+      GF_LOG_MODE: console file
+      GF_SECURITY_DISABLE_BRUTE_FORCE_LOGIN_PROTECTION: "true"
+      GF_SECURITY_DISABLE_USERNAME_LOGIN_PROTECTION: "true"
+      GF_SECURITY_DISABLE_IP_ADDRESS_LOGIN_PROTECTION: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+    volumes:
+      - app-data:/var/lib/grafana
+      - app-plugins:/var/lib/grafana/plugins
+      - app-logs:/var/log/grafana
+      - ./conf/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./conf/provisioning:/etc/grafana/provisioning:ro
+
+volumes:
+  db-data:
+  app-data:
+  app-plugins:
+  app-logs:

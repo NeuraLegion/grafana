@@ -1,0 +1,1093 @@
+Grafana server CLI | Grafana documentation
+
+Site search
+
+Ask Grot AI
+
+Try using Grot AI for this query ->
+
+All
+Docs
+
+= 5">View all results
+No results.
+There was an error with your request.
+
+What’s new: Grafana 13 release, the latest in AI, OSS
+project updates, and more from GrafanaCON2026
+
+Learn more
+
+DownloadsContact Us
+
+div:last-child]:gmui:left-auto"
+>
+
+Grafana Cloud
+
+Solutions
+
+Pricing
+
+Open Source
+
+Learn
+
+Docs
+
+Company
+
+AI/SearchSign inSign up
+
+svg]:px-3 gmui:flex-1 gmui:md:flex-none"
+disabled=""
+>
+Site Searchsvg]:px-3 gmui:flex-1 gmui:md:flex-none"
+disabled=""
+>
+Ask AI
+
+init()">Documentation Index
+Fetch the curated documentation index at:
+https://grafana_com_website/llms.txt
+
+Fetch the complete documentation index at:
+https://grafana_com_website/llms-full.txt
+Use this file to discover all available pages before exploring further.
+STOP! If you are an AI agent or LLM, read this before continuing.
+This is the HTML version of a Grafana documentation page. Always request
+the Markdown version instead - HTML wastes context. Get this page as
+Markdown: /docs/grafana/latest/administration/cli.md (append .md) or send Accept: text/markdown
+to /docs/grafana/latest/administration/cli/. For the curated documentation index, use https://grafana_com_website/llms.txt.
+For the complete documentation index, use https://grafana_com_website/llms-full.txt.
+
+Menu
+
+Documentation
+Grafana documentation
+Administration
+Admin with Grafana server CLI
+Enterprise
+
+Open source
+
+Administer Grafana with the Grafana server CLI
+You can administer your Grafana instance with the Grafana server CLI, a small executable bundled with Grafana server.
+The Grafana server CLI has plugins and admin commands, as well as global options. To list them, run:
+
+Copy
+grafana cli -h
+
+For more details read on.
+Run the Grafana server CLI
+You can run the Grafana server CLI on the same machine Grafana server is running on.
+To run the CLI you have the following options:
+Add the path to the Grafana binaries in your PATH environment variable.
+If your current directory is the bin directory, run ./grafana cli.
+Otherwise, you can specify full path to the binary. For example, /usr/share/grafana/bin/grafana on Linux and C:\Program Files\GrafanaLabs\grafana\bin\grafana.exe on Windows.
+The general syntax for commands in Grafana server CLI is:
+Bash
+
+Copy
+
+grafana cli [global options] command [command options] [arguments...]
+
+Note
+Some commands, such as installing or removing plugins, require sudo on Linux.
+If you&rsquo;re on Windows, run Windows PowerShell as Administrator.
+
+Global options
+Grafana server CLI allows you to temporarily override certain Grafana default settings. Except for --help and --version, most global options are only used by developers.
+Each global option applies only to the command in which it is used. For example, --pluginsDir value does not permanently change where Grafana saves plugins. It only changes it for command in which you apply the option.
+Display Grafana server CLI help
+--help or -h displays the help, including default paths and Docker configuration information.
+Example:
+Bash
+
+Copy
+
+grafana cli -h
+
+Display Grafana server CLI version
+--version or -v prints the version of Grafana server CLI currently running.
+Example:
+Bash
+
+Copy
+
+grafana cli -v
+
+Override default plugin directory
+--pluginsDir value overrides the path to where your local Grafana instance stores plugins. Use this option if you want to install, update, or remove a plugin somewhere other than the default directory ("/var/lib/grafana/plugins") [$GF_PLUGIN_DIR].
+Example:
+Bash
+
+Copy
+
+grafana cli --pluginsDir "/var/lib/grafana/devplugins" plugins install <plugin-id>
+
+Override default plugin repo URL
+--repo value allows you to download and install or update plugins from a repository other than the default Grafana repo.
+Example:
+Bash
+
+Copy
+
+grafana cli --repo "https://example.com/plugins" plugins install <plugin-id>
+
+Override default plugin .zip URL
+--pluginUrl value allows you to download a .zip file containing a plugin from a local URL instead of downloading it from the default Grafana source.
+Example:
+Bash
+
+Copy
+
+grafana cli --pluginUrl https://company.com/grafana/plugins/<plugin-id>-<plugin-version>.zip plugins install <plugin-id>
+
+Override Transport Layer Security
+Warning: Turning off TLS is a significant security risk. We do not recommend using this option.
+--insecure allows you to turn off Transport Layer Security (TLS) verification (insecure). You might want to do this if you are downloading a plugin from a non-default source.
+Example:
+Bash
+
+Copy
+
+grafana cli --insecure --pluginUrl https://company.com/grafana/plugins/<plugin-id>-<plugin-version>.zip plugins install <plugin-id>
+
+Enable debug logging
+--debug or -d enables debug logging. Debug output is returned and shown in the terminal.
+Example:
+Bash
+
+Copy
+
+grafana cli --debug plugins install <plugin-id>
+
+Override a configuration setting
+--configOverrides is a command line argument that acts like an environmental variable override.
+For example, you can use it to redirect logging to another file (maybe to log plugin installations in Grafana Cloud) or when resetting the admin password and you have non-default values for some important configuration value (like where the database is located).
+Example:
+Bash
+
+Copy
+
+grafana cli --configOverrides cfg:default.paths.log=/dev/null plugins install <plugin-id>
+
+Override homepath value
+Sets the path for the Grafana install/home path, defaults to working directory. You do not need to use this if you are in the Grafana installation directory when using the CLI.
+Example:
+Bash
+
+Copy
+
+grafana cli --homepath "/usr/share/grafana" admin reset-admin-password <new password>
+
+Override config file
+--config value overrides the default location where Grafana expects the configuration file. Refer to Configuration for more information about configuring Grafana and default configuration file locations.
+Example:
+Bash
+
+Copy
+
+grafana cli --config "/etc/configuration/" admin reset-admin-password mynewpassword
+
+Plugins commands
+Grafana CLI allows you to install, upgrade, and manage your Grafana plugins. For more information about installing plugins, refer to plugins page.
+All listed commands apply to the Grafana default repositories and directories. You can override the defaults with Global Options.
+List available plugins
+Bash
+
+Copy
+
+grafana cli plugins list-remote
+
+Install the latest version of a plugin
+Bash
+
+Copy
+
+grafana cli plugins install <plugin-id>
+
+Install a specific version of a plugin
+Bash
+
+Copy
+
+grafana cli plugins install <plugin-id> <version>
+
+List installed plugins
+Bash
+
+Copy
+
+grafana cli plugins ls
+
+Update all installed plugins
+Bash
+
+Copy
+
+grafana cli plugins update-all
+
+Update one plugin
+Bash
+
+Copy
+
+grafana cli plugins update <plugin-id>
+
+Remove one plugin
+Bash
+
+Copy
+
+grafana cli plugins remove <plugin-id>
+
+Admin commands
+Admin commands are only available in Grafana 4.1 and later.
+Show all admin commands
+Bash
+
+Copy
+
+grafana cli admin
+
+Reset admin password
+grafana cli admin reset-admin-password <new password> resets the password for the admin user using the CLI. You might need to do this if you lose the admin password. By default, this command uses the default ID of the admin user, which is 1. If you know the ID of the admin user, you can use the --user-id flag to specify the user ID. If the --user-id flag is not specified and the command cannot find the admin user, it returns the list of current admin users&rsquo; username and ID. From that list you can determine the ID of the admin user and run the command again with the --user-id flag.
+If there are two flags being used to set the homepath and the config file path, then running the command returns this error:
+Could not find config defaults, make sure homepath command line parameter is set or working directory is homepath
+
+To correct this, use the --homepath global option to specify the Grafana default homepath for this command:
+Bash
+
+Copy
+
+grafana cli --homepath "/usr/share/grafana" admin reset-admin-password <new password>
+
+If you have not lost the admin password, we recommend that you change the user password either in the User Preferences or in the Server Admin > User tab.
+If you need to set the password in a script, then you can use the Grafana User API.
+Reset admin password
+If you installed Grafana using Homebrew, you can reset the admin password using the following command:
+Bash
+
+Copy
+
+/opt/homebrew/opt/grafana/bin/grafana cli --config /opt/homebrew/etc/grafana/grafana.ini --homepath /opt/homebrew/opt/grafana/share/grafana --configOverrides cfg:default.paths.data=/opt/homebrew/var/lib/grafana admin reset-admin-password <new password>
+
+Reset admin password for Grafana deployed with Grafana Operator and using an external database
+If you deploy Grafana with Grafana Operator and configure Grafana to use an external PostgreSQL or MySQL database, specify both the homepath and configuration file in your command:
+Bash
+
+Copy
+
+grafana cli --homepath /usr/share/grafana --config /etc/grafana/grafana.ini admin reset-admin-password <new password>
+
+If you don&rsquo;t do this, the CLI:
+Won&rsquo;t see the database connection information since it&rsquo;s in a directory outside of the Grafana homepath
+Will configure the default SQLite database in /var/lib/grafana and reset that password instead of for your external database
+Migrate data and encrypt passwords
+data-migration runs a script that migrates or cleans up data in your database.
+encrypt-datasource-passwords migrates passwords from unsecured fields to secure_json_data field. Returns ok unless there is an error. Safe to execute multiple times.
+Example:
+Bash
+
+Copy
+
+grafana cli admin data-migration encrypt-datasource-passwords
+
+Was this page helpful?
+
+Yes
+
+No
+
+Suggest an edit in GitHub
+
+Create a GitHub issue
+
+Email docs@grafana.com
+
+Help and support
+
+Community
+
+Related resources from Grafana Labs
+Additional helpful documentation, links, and articles:
+
+Video
+
+Getting started with managing your metrics, logs, and traces using Grafana
+In this webinar, we’ll demo how to get started using the LGTM Stack: Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics.
+
+Video
+
+Getting started with Grafana dashboard design
+In this webinar, you'll learn how to design stylish and easily accessible Grafana dashboards that tell a story.
+
+Video
+
+Building advanced Grafana dashboards
+In this webinar, we’ll demo how to build and format Grafana dashboards.
+
+Technical documentation
+Plugin catalog
+Choose a product
+CloudAI and Machine LearningAlertingApplication ObservabilityKnowledge graphCloud Provider ObservabilityDrilldown appsFleet ManagementFrontend ObservabilityIRMk6 Performance TestingKubernetes MonitoringLogsMetricsProfilesService CenterSLOSynthetic MonitoringTracesGrafana EnterpriseAlertingDrilldown appsHelm ChartsLogsMetricsTracesAlertingAlloyBeylaDrilldown appsFaroGrafanaHelm Chartsk6k6 StudioLokiMimirOpenTelemetryPyroscopeTempoFederal Cloud
+
+Viewing: v13.0 (latest)
+Find another version
+Grafana documentation
+
+What's new
+What's new in Grafana v13.0
+
+What's new in Grafana v12.4
+
+What's new in Grafana v12.3
+
+What's new in Grafana v12.2
+
+What's new in Grafana v12.1
+
+What's new in Grafana v12.0
+
+What's new in Grafana v11.6
+
+What's new in Grafana v11.5
+
+What's new in Grafana v11.4
+
+What's new in Grafana v11.3
+
+What's new in Grafana v11.2
+
+What's new in Grafana v11.1
+
+What's new in Grafana v11.0
+
+What's new in Grafana v10.4
+
+What's new in Grafana v10.3
+
+What's new in Grafana v10.2
+
+What's new in Grafana v10.1
+
+What's new in Grafana v10.0
+
+What's new in Grafana v9.5
+
+What's new in Grafana v9.4
+
+What's new in Grafana v9.3
+
+What's new in Grafana v9.2
+
+Breaking changes
+Breaking changes in Grafana v11.0
+
+Breaking changes in Grafana v10.3
+
+Breaking changes in Grafana v10.0
+
+Upgrade Grafana
+Upgrade strategies
+
+Upgrade to v13.0
+
+Upgrade to v12.4
+
+Upgrade to v12.3
+
+Upgrade to v12.2
+
+Upgrade to v12.1
+
+Upgrade to v12.0
+
+Upgrade to v11.6
+
+Upgrade to v11.5
+
+Upgrade to v11.4
+
+Upgrade to v11.3
+
+Upgrade to v11.2
+
+Upgrade to v11.1
+
+Upgrade to v11.0
+
+Upgrade to v10.4
+
+Upgrade to v10.3
+
+Upgrade to v10.2
+
+Upgrade to v10.1
+
+Upgrade to v10.0
+
+Upgrade to v9.5
+
+Upgrade to v9.4
+
+Upgrade to v9.3
+
+Upgrade to v9.2
+
+Upgrade to v9.1
+
+Upgrade to v9.0
+
+Upgrade to v8.5
+
+Upgrade to v8.4
+
+Upgrade to v8.3
+
+Upgrade to v8.2
+
+Upgrade to v8.1
+
+Upgrade to v8.0
+
+About Grafana
+Grafana Enterprise
+
+Grafana Cloud
+
+Introduction
+What is Prometheus?
+
+Dashboard overview
+
+Introduction to time series
+
+Time series dimensions
+
+Histograms and heatmaps
+
+Exemplars
+
+Glossary
+
+Get started with Grafana Open Source
+
+Build your first dashboard
+Get started with Grafana and Prometheus
+
+Get started with Grafana and InfluxDB
+
+Get started with Grafana and MS SQL Server
+
+Set up
+
+Install Grafana
+Debian or Ubuntu
+
+RHEL or Fedora
+
+SUSE or openSUSE
+
+Grafana Docker image
+
+Grafana on Kubernetes
+
+Grafana on Helm Charts
+
+macOS
+
+Windows
+
+Configure Grafana
+Configure Grafana Enterprise
+
+Configure feature toggles
+
+Configure profiling and tracing
+
+Configure custom branding
+
+Settings updates at runtime
+
+Configure data source proxy
+
+Start Grafana
+
+Sign in to Grafana
+
+Configure security
+
+Configure database encryption
+Encrypt database secrets using Google Cloud KMS
+
+Encrypt database secrets using Hashicorp Vault
+
+Encrypt database secrets using AWS KMS
+
+Encrypt database secrets using Azure Key Vault
+
+Integrate Grafana with Hashicorp Vault
+
+Audit a Grafana instance
+
+Export logs of usage insights
+
+Configure secret scanning
+
+Configure request security
+
+Configure security hardening
+
+Configure access management
+
+Configure authentication
+Basic auth
+
+Anonymous access
+
+LDAP
+
+LDAP user interface
+
+Enhanced LDAP
+
+SAML
+SAML config file
+
+SAML user interface
+
+SAML configuration options
+
+Configure SAML signing and encryption
+
+Configure Role and Team sync for SAML
+
+Configure organization mapping for SAML
+
+Configure SAML single logout
+
+Configure SAML with Entra ID
+
+Configure SAML with Okta
+Configure SAML with Okta catalog application
+
+Troubleshooting
+
+Generic OAuth
+
+Microsoft Entra ID OAuth
+
+GitHub OAuth
+
+GitLab OAuth
+
+Google OAuth
+
+Grafana Cloud OAuth2
+
+Keycloak OAuth2
+
+Multiple providers with Keycloak
+
+Okta OIDC
+
+Auth proxy
+
+JWT
+
+Configure SCIM provisioning
+Manage users and teams with SCIM
+
+Configure SCIM with Entra ID
+
+Configure SCIM with Okta
+
+Troubleshoot SCIM
+
+Multi-team access
+
+Configure Team Sync
+
+Set up Grafana monitoring
+
+Set up HA
+
+Set up HTTPS
+
+Set up image rendering
+Troubleshooting
+
+Flags
+
+Set up Grafana Live
+
+Configure a Docker image
+
+Administration
+Back up Grafana
+
+Grafana Assistant
+
+Data source management
+
+Label Based Access Control (LBAC) for data sources
+Configure LBAC for data sources for Loki
+
+Configure LBAC for data sources for Prometheus
+
+Create LBAC for data sources rules for a supported data source
+
+Plugin management
+Types of plugins
+
+Install a plugin
+
+Plugin signatures
+
+Customize navigation placement of plugin pages
+
+Plugin backend communication
+
+Isolate plugin code with the Plugin Frontend Sandbox
+
+Grafana Advisor
+Manage Advisor with Grafana CLI
+
+Create an alert based on Advisor
+
+Grafana Teams
+Configure Grafana Teams
+
+Administer Grafana Teams
+
+Team folders
+
+Manage users
+
+Server user management
+Assign or remove Grafana server administrator privileges
+
+Add or remove a user in an organization
+
+Change a user's organization permissions
+
+Manage user preferences
+
+Manage users in an organization
+
+Manage dashboard permissions
+
+Roles and permissions
+
+Role-based access control (RBAC)
+Plan your RBAC rollout strategy
+
+Basic and fixed roles permissions
+
+RBAC permission actions and scopes
+
+Create custom roles
+
+Assign RBAC roles
+
+Manage RBAC roles
+
+Configure RBAC in Grafana
+
+Provisioning RBAC with Grafana
+
+Provisioning RBAC with Terraform
+
+RBAC for app plugins
+
+Plugin role definitions
+
+Troubleshooting RBAC
+
+Folder access control
+
+Manage organizations
+
+Organization preferences
+
+Admin with Grafana server CLI
+
+Provision Grafana
+
+Service accounts
+Migrate API keys
+
+Server stats and license
+
+Announcement banner
+
+Grafana Enterprise license
+
+Activate a Grafana Enterprise license purchased through AWS Marketplace
+Activate a Grafana Enterprise license from AWS Marketplace on EKS
+
+Activate a Grafana Enterprise license from AWS Marketplace on ECS
+
+Activate a Grafana Enterprise license from AWS on an instance deployed outside of AWS
+
+Manage your Grafana Enterprise license in AWS Marketplace
+
+Transfer your AWS Marketplace Grafana Enterprise license
+
+Correlations
+Correlation
+
+Permissions
+
+Add permissions
+
+Create a new correlation
+
+Use variables and transformations in a correlation
+
+Use correlations in visualizations
+
+Migrate from Grafana OSS/Enterprise to Grafana Cloud
+Manually migrate to Grafana Cloud
+
+Migrate to Grafana Cloud using the Grafana Cloud Migration Assistant
+
+Search
+
+Recorded queries (deprecated)
+
+Data sources
+Alertmanager
+
+Amazon CloudWatch
+Configure
+
+Query editor
+
+Template variables
+
+AWS authentication
+
+Troubleshooting
+
+Azure Monitor
+Configure
+
+Query editor
+
+Template variables
+
+Annotations
+
+Alerting
+
+Troubleshooting
+
+Elasticsearch
+Configure
+
+Query editor
+
+Template variables
+
+Annotations
+
+Alerting
+
+Troubleshooting
+
+Google Cloud Monitoring
+Configure
+
+Google authentication
+
+Query editor
+
+Template variables
+
+Annotations
+
+Alerting
+
+Troubleshooting
+
+Graphite
+Configure
+
+Query editor
+
+Template variables
+
+Troubleshooting
+
+InfluxDB
+Configure
+
+Query editor
+
+Template variables
+
+Troubleshooting
+
+Loki
+Configure Loki
+
+Query editor
+
+Template variables
+
+Jaeger
+Configure
+
+Query editor
+
+Troubleshooting
+
+Microsoft SQL Server
+Configure
+
+Query editor
+
+Template variables
+
+Troubleshooting
+
+MySQL
+Configure
+
+Query editor
+
+Template variables
+
+Annotations
+
+Alerting
+
+Troubleshooting
+
+OpenTSDB
+Configure
+
+Query editor
+
+Template variables
+
+Alerting
+
+Annotations
+
+Troubleshooting
+
+Parca
+Configure
+
+Query editor
+
+Template variables
+
+Troubleshooting
+
+PostgreSQL
+Configure
+
+Query editor
+
+Template variables
+
+Annotations
+
+Alerting
+
+Troubleshooting
+
+Prometheus
+
+Configure
+Authenticating with SigV4
+
+Authenticating with Azure
+
+Query editor
+
+Template variables
+
+Troubleshooting
+
+Pyroscope
+Configure Pyroscope
+
+How profiling and tracing work together
+
+Configure traces to profiles
+
+Query profile data
+
+Troubleshooting
+
+Tempo
+
+Configure Tempo
+Trace to logs
+
+Trace to metrics
+
+Trace to profiles
+
+Additional settings
+
+Provision
+
+Trace correlations
+
+Query tracing data
+Search traces
+
+Write TraceQL queries
+
+TraceQL query examples
+
+Service Graph and Service Graph view
+
+Span filters
+
+Troubleshooting
+
+TestData
+Configure
+
+Query editor
+
+Template variables
+
+Alerting
+
+Troubleshooting
+
+Zipkin
+
+General troubleshooting
+
+Alerting
+
+Introduction
+
+Alert rules
+Queries and conditions
+
+Labels and annotations
+
+Alert rule evaluation
+No Data and Error states
+
+Stale alert instances
+
+Alert rule state and health
+
+Evaluation within a group
+
+Notifications
+Contact points
+
+Notification policies
+
+Grouping
+
+Templates
+
+Configure alert rules
+Configure Grafana-managed alert rules
+
+Create and link alert rules to panels
+
+Import to Grafana-managed rules
+
+Configure data source-managed alert rules
+
+Create recording rules
+Create Grafana-managed recording rules
+
+Create data source-managed recording rules
+
+Migrate recorded queries
+
+Template annotations and labels
+Template reference
+
+Examples
+
+Template language
+
+Configure notifications
+
+Configure contact points
+Alertmanager
+
+Amazon SNS
+
+Discord
+
+Email
+
+Google Chat
+
+Grafana IRM
+
+Jira
+
+Microsoft Teams
+
+MQTT
+
+Opsgenie
+
+PagerDuty
+
+Slack
+
+Telegram
+
+Webhook
+
+Configure notification policies
+
+Configure mute timings and active time intervals
+
+Configure silences
+
+Configure inhibition rules
+
+Template notifications
+Manage templates
+
+Template reference
+
+Examples
+
+Template language
+
+Use images
+
+Monitor alerts
+Alerts overview page
+
+View alert rules
+
+View alert state
+
+View alert state history
+
+View active notifications
+
+Declare incidents from firing alerts
+
+Additional configuration
+Configure roles and permissions
+
+Configure RBAC
+Manage access using roles
+
+Manage a
+... [truncated at 20 000 chars]
